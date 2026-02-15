@@ -1,5 +1,4 @@
 import type React from "react";
-import { Link } from "react-router-dom";
 import {
   Terminal,
   ExternalLink,
@@ -489,33 +488,6 @@ export default function Founder() {
             ))}
           </div>
         </div>
-
-        {/* ═══ PSYCH://LOG LINK ═══ */}
-        <Link
-          to="/blog"
-          className="block border border-white/10 bg-[#080808] hover:border-pink-500/30 hover:bg-[#0a0a0a] transition-all group mb-8"
-        >
-          <div className="p-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Terminal size={16} className="text-pink-500" />
-              <div>
-                <div className="text-xs font-bold text-white uppercase tracking-widest group-hover:text-pink-400 transition-colors">
-                  PSYCH://LOG
-                </div>
-                <div className="text-[10px] text-gray-600 uppercase tracking-widest mt-0.5">
-                  Psychology, behavioral patterns, and mental models for
-                  builders
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]" />
-              <span className="text-[10px] text-pink-400 uppercase tracking-widest font-bold group-hover:text-pink-300 transition-colors">
-                ACCESS →
-              </span>
-            </div>
-          </div>
-        </Link>
       </div>
     </div>
   );
