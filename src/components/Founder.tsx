@@ -93,19 +93,20 @@ const FOUNDER = {
   ],
   publications: [
     {
-      title: "PUBLICATION_TITLE",
-      venue: "VENUE / PLATFORM",
-      date: "2024",
+      title: "RLD: Rate-Level Derivatives",
+      venue: "Whitepaper",
+      date: "2026",
       url: "#",
       description:
-        "Placeholder description of your publication or research paper.",
+        "On-chain synthetic bonds and credit-default swaps. Introduces a derivative structure that tracks lending pool interest rates, enabling fixed-yield bonds via TWAMM unwinds and parametric CDS insurance — all unified in a single Uniswap V4 liquidity layer.",
     },
     {
-      title: "PUBLICATION_TITLE_2",
-      venue: "VENUE / PLATFORM",
-      date: "2024",
+      title: "PDLP: Perpetual Demand Lending Pool",
+      venue: "Whitepaper",
+      date: "2025",
       url: "#",
-      description: "Placeholder description of another publication.",
+      description:
+        "A synchronized spot + perpetual futures DEX with built-in dynamic LP hedging and MEV protection. Derives a closed-form mean-variance hedge using Euler lending loops, achieving convex volatility harvesting with constant delta for LPs.",
     },
   ],
   skills: [
