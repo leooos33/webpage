@@ -7,12 +7,10 @@ import {
   Mail,
   MapPin,
   Calendar,
-  Briefcase,
   BookOpen,
   GraduationCap,
-  Zap,
+  Award,
   ChevronRight,
-  Globe,
 } from "lucide-react";
 
 // Custom Telegram branded icon
@@ -42,8 +40,10 @@ const FOUNDER = {
   location: "Krakow, Poland",
   email: "yevhen@rld.fi",
   bio: [
-    "Placeholder bio paragraph one. Describe your background, what drives you, and how you came to build RLD Protocol.",
-    "Placeholder bio paragraph two. Talk about your vision for fixed-rate DeFi infrastructure and what makes RLD unique.",
+    "DeFi builder focused on structured products, liquidity infrastructure, and on-chain derivatives design.",
+    "Pioneered impermanent-loss-hedged LP vaults using Squeeth power perpetuals on Uniswap V3 and Uniswap V4 hook-based systems. Received grants and hackathon prizes from the Uniswap Foundation, Morpho DAO, Ethena, Brevis, Encode Club, and Opyn  — spanning security audit funding, accelerator programs, and development grants. VC funding from Synergis Capital.",
+    "Now building RLD Protocol — a fixed-rate layer for DeFi that introduces on-chain synthetic bonds and parametric credit-default swaps on Uniswap V4.",
+    "Outside of DeFi — love specialty espresso, psychology, and squash.",
   ],
   socials: [
     { label: "TWITTER", href: "https://x.com/yevhenx", Icon: Twitter },
@@ -96,7 +96,7 @@ const FOUNDER = {
       title: "RLD: Rate-Level Derivatives",
       venue: "Whitepaper",
       date: "2026",
-      url: "#",
+      url: "/RLD.pdf",
       description:
         "On-chain synthetic bonds and credit-default swaps. Introduces a derivative structure that tracks lending pool interest rates, enabling fixed-yield bonds via TWAMM unwinds and parametric CDS insurance — all unified in a single Uniswap V4 liquidity layer.",
     },
@@ -104,9 +104,49 @@ const FOUNDER = {
       title: "PDLP: Perpetual Demand Lending Pool",
       venue: "Whitepaper",
       date: "2025",
-      url: "#",
+      url: "https://lumisfi.notion.site/pdlp",
       description:
         "A synchronized spot + perpetual futures DEX with built-in dynamic LP hedging and MEV protection. Derives a closed-form mean-variance hedge using Euler lending loops, achieving convex volatility harvesting with constant delta for LPs.",
+    },
+    {
+      title: "Hedging Impermanent Loss with Uniswap V4 Hooks & Euler",
+      venue: "Twitter / X",
+      date: "2025",
+      url: "https://x.com/yevhenx/status/1877623802672058493",
+      description:
+        "Synthetic ETH vault combining leveraged long 3x and short 2x positions via Euler loops to provide liquidity for ETH-USDC, earning ~3× more trading fees while maintaining 1x net exposure. Backtested 69.8% vs ETH over 2 years.",
+    },
+    {
+      title: "Atomic Derivatives Protocol",
+      venue: "Whitepaper",
+      date: "2024",
+      url: "/Atomic_Derivatives_Protocol.pdf",
+      description:
+        "Conditional liquidity protocol leveraging intent-centric architecture to target arbitrary portfolio profiles — from leveraged tokens without liquidations to option-like payoffs — across CoW Protocol, Uniswap V4 hooks, and solver networks.",
+    },
+    {
+      title: "Hedgehog V2",
+      venue: "Medium",
+      date: "2023",
+      url: "https://medium.com/@yevhenx/hedgehog-v2-fd3f958af97e",
+      description:
+        "Refined automated liquidity management and hedging mechanisms based on performance data and learnings from the initial Hedgehog vault implementation.",
+    },
+    {
+      title: "Hedgehog LP Strategy",
+      venue: "Medium",
+      date: "2022",
+      url: "https://medium.com/@yevhenx/hedgehog-lp-strategy-ae43f339beb7",
+      description:
+        "Automated on-chain vault that replicates an ETH portfolio by providing concentrated liquidity on Uniswap V3 and hedging impermanent loss to target growth in ETH terms.",
+    },
+    {
+      title: "Hedging Uniswap V3 with Squeeth",
+      venue: "Medium",
+      date: "2022",
+      url: "https://medium.com/@yevhenx/hedging-uniswap-v3-with-squeeth-c6c0a8fc5572",
+      description:
+        "Delta-neutral and IL-hedged LP strategies for Uniswap V3 concentrated liquidity using Squeeth (power perpetuals) to neutralize directional and convexity risk.",
     },
   ],
   skills: [
@@ -120,6 +160,72 @@ const FOUNDER = {
     "Rust",
     "React",
     "Python",
+  ],
+  grants: [
+    {
+      grantor: "Atrium Academy & Uniswap Foundation",
+      title: "Hook Product Accelerator",
+      date: "2025",
+      url: "https://x.com/lumisfi_/status/1965408833892950449",
+      description:
+        "Selected as one of 11 teams for a 6-week intensive accelerator focused on deep product development for Uniswap V4, culminating in a Demo Day presentation.",
+    },
+    {
+      grantor: "Encode Club & Ethena",
+      title: "Encode x Ethena Accelerator",
+      date: "2025",
+      url: "https://x.com/lumisfi_/status/1901690855314149402",
+      description:
+        "Top 2 team in an 8-week accelerator program for the Ethena ecosystem with $15k in milestone-based funding and a $35k prize pool.",
+    },
+    {
+      grantor: "Morpho DAO",
+      title: "Morpho DAO Grant",
+      date: "2025",
+      url: "https://x.com/lumisfi_/status/1891918737315397977",
+      description:
+        "Ranked #1 by community votes and received a pilot grant for developing an optimized stablecoin yield product powered by Uniswap V4 hooks.",
+    },
+    {
+      grantor: "Uniswap Foundation",
+      title: "Uniswap V4 Security Audit Grant — Cohort 1",
+      date: "2025",
+      url: "https://x.com/lumisfi_/status/1882154946952671418",
+      description:
+        "One of 9 teams selected to receive a 100% subsidized top-tier security audit for Uniswap V4 hooks ahead of mainnet launch.",
+    },
+    {
+      grantor: "Uniswap Foundation",
+      title: "Uniswap Foundation Prize — UniCord",
+      date: "2024",
+      url: "https://x.com/AtriumAcademy/status/1838997297507574176",
+      description:
+        "Awarded for UniCord, a NoOp hook that maximizes stablecoin pool yield by deploying idle liquidity to Morpho with on-demand withdrawals for capital-efficient trading.",
+    },
+    {
+      grantor: "Brevis",
+      title: "Brevis Prize — Lumis",
+      date: "2024",
+      url: "https://x.com/AtriumAcademy/status/1803883715279360211",
+      description:
+        "Awarded at the Atrium Academy Uniswap Hook hackathon for Lumis, featuring hook-based options and Liquidity-as-a-Service leveraging Brevis ZK-proofs for data-driven yield optimization.",
+    },
+    {
+      grantor: "Opyn",
+      title: "Opyn Development Grant — Hedgehog",
+      date: "2022",
+      url: "https://x.com/lumisfi_/status/1540025855476391936",
+      description:
+        "Development grant to launch Hedgehog — an automated strategy providing liquidity on Uniswap V3 and hedging impermanent loss using Squeeth (power perpetuals).",
+    },
+    {
+      grantor: "Encode Club & Wintermute",
+      title: "Hack DeFi with Wintermute — Conditional.fi",
+      date: "2021",
+      url: "https://www.blog.encode.club/hack-defi-with-wintermute-finale-prizewinners-and-summary-3a5de6e92967",
+      description:
+        "Runner-up prize ($1,000) for Conditional.fi — a conditional liquidity protocol enabling market makers to set up arbitrary payoff curves.",
+    },
   ],
 };
 
@@ -171,14 +277,6 @@ export default function Founder() {
   return (
     <div className="min-h-screen bg-[#050505] selection:bg-pink-500/30 selection:text-white">
       <div className="max-w-[750px] mx-auto px-4 md:px-6 py-8 md:py-12">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-8 text-[10px] text-gray-600 uppercase tracking-widest">
-          <Terminal size={12} />
-          <span>RLD://</span>
-          <ChevronRight size={10} />
-          <span className="text-gray-400">FOUNDER</span>
-        </div>
-
         {/* ═══ IDENTITY CARD — photo left, info right ═══ */}
         <div className="border border-white/10 bg-[#080808] mb-8">
           <div className="flex flex-col md:flex-row">
@@ -290,6 +388,44 @@ export default function Founder() {
           </div>
         </div>
 
+        {/* ═══ GRANTS ═══ */}
+        <div className="border border-white/10 bg-[#080808] mb-8">
+          <PanelHeader icon={Award} title="GRANTS" />
+          <div className="p-6 space-y-4">
+            {FOUNDER.grants.map((grant, i) => (
+              <a
+                key={i}
+                href={grant.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block border border-white/5 bg-white/[0.01] hover:bg-white/[0.04] hover:border-white/15 transition-all p-4 group"
+              >
+                <div className="space-y-1">
+                  <div className="text-xs font-bold text-white uppercase tracking-wide group-hover:text-pink-400 transition-colors flex items-center gap-2">
+                    {grant.title}
+                    <ExternalLink
+                      size={10}
+                      className="text-gray-600 group-hover:text-pink-400 transition-colors"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-pink-400 uppercase tracking-widest font-bold">
+                      {grant.grantor}
+                    </span>
+                    <span className="text-[10px] text-gray-600">•</span>
+                    <span className="text-[10px] text-gray-500 uppercase tracking-widest">
+                      {grant.date}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 font-mono leading-relaxed mt-1">
+                    {grant.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* ═══ PUBLICATIONS ═══ */}
         <div className="border border-white/10 bg-[#080808] mb-8">
           <PanelHeader icon={BookOpen} title="PUBLICATIONS" />
@@ -327,13 +463,6 @@ export default function Founder() {
                 </div>
               </a>
             ))}
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-12 mb-8 text-center">
-          <div className="text-[9px] text-gray-700 uppercase tracking-[0.3em]">
-            ── RLD PROTOCOL ── FIXED RATES FOR DEFI ──
           </div>
         </div>
       </div>
