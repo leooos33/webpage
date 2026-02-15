@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import {
   Terminal,
   ExternalLink,
@@ -10,11 +10,16 @@ import {
   BookOpen,
   GraduationCap,
   Award,
-  ChevronRight,
 } from "lucide-react";
 
 // Custom Telegram branded icon
-function TelegramIcon({ size = 12, className }) {
+function TelegramIcon({
+  size = 12,
+  className,
+}: {
+  size?: number;
+  className?: string;
+}) {
   return (
     <svg
       width={size}
@@ -231,7 +236,17 @@ const FOUNDER = {
 
 // ── Sub-components ────────────────────────────────────────────
 
-function TimelineItem({ role, org, period, description }) {
+function TimelineItem({
+  role,
+  org,
+  period,
+  description,
+}: {
+  role: string;
+  org: string;
+  period: string;
+  description: string;
+}) {
   return (
     <div className="relative pl-6 pb-8 last:pb-0 group">
       <div className="absolute left-0 top-1.5 bottom-0 w-px bg-white/10 group-last:bg-transparent" />
@@ -257,7 +272,15 @@ function TimelineItem({ role, org, period, description }) {
   );
 }
 
-function PanelHeader({ icon: Icon, title, indicator }) {
+function PanelHeader({
+  icon: Icon,
+  title,
+  indicator,
+}: {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  title: string;
+  indicator?: boolean;
+}) {
   return (
     <div className="p-4 border-b border-white/10 bg-[#0a0a0a] flex justify-between items-center">
       <h3 className="text-xs font-bold tracking-widest text-white uppercase flex items-center gap-2">
