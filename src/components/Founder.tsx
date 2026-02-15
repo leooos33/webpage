@@ -393,7 +393,7 @@ export default function Founder() {
             {FOUNDER.bio.map((p, i) => (
               <p
                 key={i}
-                className="text-sm text-gray-400 leading-relaxed font-mono"
+                className="text-xs text-gray-400 leading-relaxed font-mono"
               >
                 {p}
               </p>
