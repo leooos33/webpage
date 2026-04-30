@@ -59,6 +59,7 @@ const FOUNDER = {
     { role: "Analyst", org: "JMT", period: "2017 — 2018", description: "Financial analysis and research." },
   ],
   publications: [
+    { title: "Just-In-Time Matching Engine", venue: "Technical Note", date: "2026", url: "https://docs.rld.fi/research/jit-matching-engine" },
     { title: "RLD: Rate-Level Derivatives", venue: "Whitepaper", date: "2026", url: "https://docs.rld.fi/research/executive-summary" },
     { title: "PDLP: Perpetual Demand Lending Pool", venue: "Whitepaper", date: "2025", url: "https://secretive-glass-533.notion.site/PDLP-Perpetual-Demand-Lending-Pool-fc7c2f1bc76a827b8259817ab6c88c4b?pvs=73" },
     { title: "Hedging IL with Uniswap V4 Hooks & Euler", venue: "Twitter / X", date: "2025", url: "https://x.com/yevhenx/status/1877623802672058493" },
