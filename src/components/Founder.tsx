@@ -184,14 +184,14 @@ export default function Founder() {
                     className="flex items-baseline justify-between gap-4 py-2 group"
                   >
                     <div className="flex items-baseline gap-3 min-w-0">
-                      <span className="font-jbm text-[9px] text-[#2a2a2a] tracking-widest flex-shrink-0">
+                      <span className="font-jbm text-[10px] text-[#2a2a2a] tracking-widest flex-shrink-0">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="font-jbm text-[11px] text-[#888] group-hover:text-white transition-colors truncate">
+                      <span className="font-jbm text-[12px] text-[#888] group-hover:text-white transition-colors truncate">
                         {g.title}
                       </span>
                     </div>
-                    <span className="font-jbm text-[10px] text-[#333] flex-shrink-0">{g.date}</span>
+                    <span className="font-jbm text-[12px] text-[#333] flex-shrink-0">{g.date}</span>
                   </a>
                 ))}
               </div>
@@ -216,13 +216,13 @@ export default function Founder() {
                     <span className="font-sg font-light text-white/90 text-[13px] tracking-[-0.01em]">
                       {exp.role}
                     </span>
-                    <span className="font-jbm text-[10px] text-[#444] tracking-[0.12em] uppercase">
+                    <span className="font-jbm text-[#444]  font-light text-[13px]">
                       {exp.org}
                     </span>
                   </div>
                   <p className="font-jbm text-[11px] text-[#555] leading-[1.7] mt-0.5">{exp.description}</p>
                 </div>
-                <span className="font-jbm text-[10px] text-[#333] tracking-[0.1em] flex-shrink-0 hidden sm:block">
+                <span className="font-jbm text-[11px] text-[#333] tracking-[0.1em] flex-shrink-0 hidden sm:block">
                   {exp.period}
                 </span>
               </div>
@@ -252,12 +252,12 @@ export default function Founder() {
                   <span className="font-sg font-light text-white/90 text-[13px] tracking-[-0.01em] group-hover:text-[#ccc] transition-colors">
                     {pub.title}
                   </span>
-                  <span className="font-jbm text-[9px] text-[#444] tracking-[0.18em] uppercase">
+                  <span className="font-jbm text-[#444] font-light text-[13px]">
                     {pub.venue}
                   </span>
                   <ExternalLink size={10} className="text-[#222] group-hover:text-[#555] transition-colors" />
                 </div>
-                <span className="font-jbm text-[10px] text-[#333] tracking-[0.1em] flex-shrink-0 hidden sm:block">
+                <span className="font-jbm text-[11px] text-[#333] tracking-[0.1em] flex-shrink-0 hidden sm:block">
                   {pub.date}
                 </span>
               </a>
