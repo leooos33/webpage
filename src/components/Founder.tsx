@@ -4,20 +4,12 @@ import {
   Github,
   Twitter,
   Mail,
-  MapPin,
   GraduationCap,
 } from "lucide-react";
 import useInView from "../hooks/useInView";
 import founderPhoto from "../assets/AV.png";
 
-// ── Grain overlay ─────────────────────────────────────────────
-const GRAIN_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E")`;
-const Grain = () => (
-  <div
-    className="pointer-events-none absolute inset-0 opacity-25"
-    style={{ backgroundImage: GRAIN_SVG, backgroundSize: "192px 192px" }}
-  />
-);
+
 
 // ── Telegram icon ─────────────────────────────────────────────
 function TelegramIcon({ size = 12, className }: { size?: number; className?: string }) {
