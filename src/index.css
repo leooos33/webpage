@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Space Grotesk", system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -26,15 +26,4 @@ body {
 
 *:focus-visible {
   outline: none;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 0;
 }
