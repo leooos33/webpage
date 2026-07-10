@@ -52,7 +52,7 @@ const FOUNDER = {
     { label: "TELEGRAM", href: "https://t.me/yevhenx", Icon: TelegramIcon },
   ],
   experience: [
-    { role: "Founder", org: "RLD Protocol", period: "2025 — Present", description: "On-chain synthetic bonds and credit-default swaps on Uniswap V4." },
+    { role: "Founder", org: "RLD", period: "2025 — Present", description: "Credit notes protocol: on-chain credit-default and interest rate swaps." },
     { role: "Founder", org: "Lumis", period: "2022 — 2024", description: "Structured Liquidity Protocol - IL-hedged LP vaults on Uniswap V3 with Squeeth power perpetuals." },
     { role: "Project Owner", org: "Minter", period: "2019 — 2020", description: "RPC provider infrastructure and node operations." },
     { role: "Quant", org: "JMT", period: "2018 — 2019", description: "Quantitative strategies for perpetual futures market-making." },
@@ -60,7 +60,7 @@ const FOUNDER = {
   ],
   publications: [
     { title: "Just-In-Time Matching Engine", venue: "Technical Note", date: "2026", url: "https://docs.rld.fi/research/jit-matching-engine" },
-    { title: "RLD: Rate-Level Derivatives", venue: "Whitepaper", date: "2026", url: "https://docs.rld.fi/research/executive-summary" },
+    { title: "Credit Notes Protocol", venue: "Whitepaper", date: "2026", url: "https://app.notion.com/p/Credit-Notes-Protocol-398c2f1bc76a80589c41c90732a88f25?source=copy_link" },
     { title: "PDLP: Perpetual Demand Lending Pool", venue: "Whitepaper", date: "2025", url: "https://secretive-glass-533.notion.site/PDLP-Perpetual-Demand-Lending-Pool-fc7c2f1bc76a827b8259817ab6c88c4b?pvs=73" },
     { title: "Hedging IL with Uniswap V4 Hooks & Euler", venue: "Twitter / X", date: "2025", url: "https://x.com/yevhenx/status/1877623802672058493" },
     { title: "Atomic Derivatives Protocol", venue: "Whitepaper", date: "2024", url: "https://drive.google.com/file/d/1Iy9P8Mm0cGkNz4I9I8VLSVptVHNyUzXe" },
@@ -264,7 +264,6 @@ export default function Founder() {
         <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <span className="font-jbm text-[11px] tracking-[0.3em] uppercase text-white font-bold">RLD</span>
-            <span className="font-jbm text-[9px] tracking-[0.18em] uppercase text-[#444]">Founder Page</span>
           </div>
           <div className="flex items-center gap-6">
             {[
