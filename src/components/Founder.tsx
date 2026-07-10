@@ -225,7 +225,7 @@ export default function Founder() {
 
         {/* ═══ ROW 3: PUBLICATIONS ═══ */}
         <section className="mb-16" ref={pubsRef}>
-          <SectionLabel title="Publications" inView={pubsIn} />
+          <SectionLabel title="Research" inView={pubsIn} />
           <div
             className="border border-[#141414] bg-[#080808] divide-y divide-[#111] transition-all duration-[600ms]"
             style={{ opacity: pubsIn ? 1 : 0, transform: pubsIn ? "translateY(0)" : "translateY(16px)" }}
