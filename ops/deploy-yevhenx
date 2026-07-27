@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if [[ $# -ne 1 || ! $1 =~ ^[0-9a-f]{40}$ ]]; then
+  echo "usage: deploy-yevhenx <40-character commit sha>" >&2
+  exit 64
+fi
+
+sha=$1
+deploy_root=/var/www/yevhenx
+releases=$deploy_root/releases
+uploads=/var/lib/yevhenx-deploy/uploads
+archive=$uploads/$sha.tar.gz
+release=$releases/$sha
+current=$deploy_root/current
+public_url=${YEVHENX_PUBLIC_URL:-https://yevhenx.com}
+stage=
+
+cleanup() {
+  [[ -z $stage || ! -d $stage ]] || rm -rf -- "$stage"
+}
+trap cleanup EXIT
+
+[[ -f $archive ]] || {
+  echo "missing release archive: $archive" >&2
+  exit 66
+}
+[[ $(stat -c %U "$archive") == yevhenx-deploy ]] || {
+  echo "release archive has an unexpected owner" >&2
+  exit 66
+}
+
+mkdir -p "$releases"
+stage=$(mktemp -d "$releases/.stage-$sha.XXXXXX")
+tar -xzf "$archive" --directory "$stage" --no-same-owner --no-same-permissions
+
+[[ -f $stage/index.html && -f $stage/release.json ]] || {
+  echo "release is missing index.html or release.json" >&2
+  exit 65
+}
+if find "$stage" -type l -print -quit | grep -q .; then
+  echo "release must not contain symlinks" >&2
+  exit 65
+fi
+grep -Fq "\"commit\":\"$sha\"" "$stage/release.json" || {
+  echo "release metadata does not match $sha" >&2
+  exit 65
+}
+
+find "$stage" -type d -exec chmod 755 {} +
+find "$stage" -type f -exec chmod 644 {} +
+chown -R root:www-data "$stage"
+
+if [[ -e $release ]]; then
+  rm -rf -- "$stage"
+  stage=
+else
+  mv -- "$stage" "$release"
+  stage=
+fi
+
+previous=$(readlink -f "$current" 2>/dev/null || true)
+next=$deploy_root/.current-$sha
+ln -s "$release" "$next"
+mv -Tf "$next" "$current"
+
+rollback() {
+  if [[ -n $previous && -d $previous ]]; then
+    rollback_link=$deploy_root/.rollback-$sha
+    ln -s "$previous" "$rollback_link"
+    mv -Tf "$rollback_link" "$current"
+  fi
+}
+
+if ! curl -fsS -H 'Host: yevhenx.com' \
+  http://127.0.0.1/release.json | grep -Fq "\"commit\":\"$sha\""; then
+  rollback
+  echo "origin health check failed; restored $previous" >&2
+  exit 69
+fi
+
+if ! curl -fsS --retry 2 --retry-delay 1 \
+  "$public_url/release.json?commit=$sha" |
+  grep -Fq "\"commit\":\"$sha\""; then
+  rollback
+  echo "public health check failed; restored $previous" >&2
+  exit 69
+fi
+
+rm -f -- "$archive"
+echo "deployed $sha (previous: ${previous:-none})"

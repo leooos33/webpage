@@ -1,17 +1,16 @@
-name: Deploy to GitHub Pages
+name: CI and deploy yevhenx.com
 
 on:
+  pull_request:
   push:
     branches: [master]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: yevhenx-production
   cancel-in-progress: false
 
 jobs:
@@ -21,20 +20,66 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      - run: npm run lint
+      - name: Build with the production umask
+        run: |
+          umask 0077
+          npm run build
+          printf '{"commit":"%s"}\n' "$GITHUB_SHA" > dist/release.json
+          chmod a+r dist/release.json
+      - name: Validate the static artifact
+        run: |
+          test -f dist/index.html
+          test -z "$(find dist -type f ! -perm -004 -print -quit)"
+          npm run preview -- --host 127.0.0.1 --port 4173 >/tmp/yevhenx-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for _ in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null 2>&1 && break
+            sleep 0.25
+          done
+          curl -fsS http://127.0.0.1:4173/release.json |
+            grep -F "\"commit\":\"$GITHUB_SHA\""
+      - uses: actions/upload-artifact@v4
         with:
+          name: yevhenx-dist
           path: dist
+          if-no-files-found: error
+          retention-days: 7
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://yevhenx.com
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: yevhenx-dist
+          path: dist
+      - name: Configure pinned SSH access
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Deploy immutable release
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          tar -C dist -czf release.tar.gz .
+          scp -o BatchMode=yes release.tar.gz \
+            "$DEPLOY_USER@$DEPLOY_HOST:uploads/$GITHUB_SHA.tar.gz"
+          ssh -o BatchMode=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo /usr/local/sbin/deploy-yevhenx $GITHUB_SHA"
+          curl -fsS "https://yevhenx.com/release.json?commit=$GITHUB_SHA" |
+            grep -F "\"commit\":\"$GITHUB_SHA\""
