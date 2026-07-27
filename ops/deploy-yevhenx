@@ -16,6 +16,12 @@ current=$deploy_root/current
 public_url=${YEVHENX_PUBLIC_URL:-https://yevhenx.com}
 stage=
 
+exec 9>"$deploy_root/.deploy.lock"
+flock -n 9 || {
+  echo "another deployment is active" >&2
+  exit 75
+}
+
 cleanup() {
   [[ -z $stage || ! -d $stage ]] || rm -rf -- "$stage"
 }
@@ -88,4 +94,15 @@ if ! curl -fsS --retry 2 --retry-delay 1 \
 fi
 
 rm -f -- "$archive"
+
+find "$releases" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' |
+  sort -nr |
+  tail -n +11 |
+  cut -d' ' -f2- |
+  while IFS= read -r stale; do
+    if [[ $stale =~ ^$releases/[0-9a-f]{40}$ && $stale != $release ]]; then
+      rm -rf -- "$stale"
+    fi
+  done
+
 echo "deployed $sha (previous: ${previous:-none})"
